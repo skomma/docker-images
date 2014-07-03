@@ -27,7 +27,7 @@ RUN apt-get update
 RUN apt-get dist-upgrade -y
 
 ## install essential packages
-RUN apt-get install -y --no-install-recommends dialog vim nano psmisc language-pack-en supervisor
+RUN apt-get install -y --no-install-recommends dialog vim nano psmisc language-pack-en software-properties-common supervisor
 
 ## Fix locale.
 RUN locale-gen en_US
@@ -56,6 +56,12 @@ RUN useradd -d /home/syunsuke -m -s /bin/bash syunsuke && \
 ADD src/authorized_keys /home/syunsuke/.ssh/
 RUN chown -R syunsuke: /home/syunsuke/.ssh && \
     chmod 700 /home/syunsuke/.ssh
+
+
+## add user(common user)
+RUN useradd -d /home/ubuntu -m -s /bin/bash ubuntu && \
+    usermod -aG sudo ubuntu
+RUN echo 'ubuntu:ubuntu' | chpasswd
 
 
 ## supervisor settings
