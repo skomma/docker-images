@@ -59,7 +59,8 @@ RUN chown -R syunsuke: /home/syunsuke/.ssh && \
 
 
 ## supervisor settings
-ADD src/supervisord.conf /etc/supervisor/conf.d/
+ADD src/supervisord.conf /etc/supervisor/conf.d/no-daemon.conf
+ADD src/supervisord-sshd.conf /etc/supervisor/conf.d/sshd.conf
 
 ## sshd Settings
 RUN sed -i 's/.*session.*required.*pam_loginuid.so.*/session optional pam_loginuid.so/g' /etc/pam.d/sshd
