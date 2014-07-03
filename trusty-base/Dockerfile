@@ -1,6 +1,6 @@
 # image id locked
 #FROM ubuntu:trusty
-FROM ef83896b7fb9
+FROM c1bd2f6276a1
 ENV DEBIAN_FRONTEND noninteractive
 
 MAINTAINER Syunsuke Komma <syunsuke@weseek.co.jp>
