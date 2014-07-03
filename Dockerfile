@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 ENV DEBIAN_FRONTEND noninteractive
 
-MAINTAINER Yuki Takei yuki@fio.jp
+MAINTAINER Syunsuke Komma <syunsuke@weseek.co.jp>
 
 
 
@@ -27,7 +27,7 @@ RUN apt-get update
 RUN apt-get dist-upgrade -y
 
 ## install essential packages
-RUN apt-get install -y --no-install-recommends dialog nano psmisc language-pack-en supervisor
+RUN apt-get install -y --no-install-recommends dialog vim nano psmisc language-pack-en supervisor
 
 ## Fix locale.
 RUN locale-gen en_US
@@ -42,18 +42,20 @@ RUN cp /etc/sudoers /tmp/sudoers.new && \
 
 
 
-#" install utilities
+## install utilities
 RUN apt-get install -y git tmux openssh-server
 
 
 
 ## add user
-RUN useradd -d /home/yuki -m -s /bin/bash yuki && \
-    adduser yuki sudo && \
-    mkdir /home/yuki/.ssh && \
-    chmod 700 /home/yuki/.ssh
-ADD src/authorized_keys /home/yuki/.ssh/
-RUN chown -R yuki: /home/yuki
+RUN useradd -d /home/syunsuke -m -s /bin/bash syunsuke && \
+    usermod -aG sudo syunsuke
+## add user's authorized_keys
+## MUST install by the below order
+## https://github.com/dotcloud/docker/issues/1295#issuecomment-21651778
+ADD src/authorized_keys /home/syunsuke/.ssh/
+RUN chown -R syunsuke: /home/syunsuke/.ssh && \
+    chmod 700 /home/syunsuke/.ssh
 
 
 ## supervisor settings
