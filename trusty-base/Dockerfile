@@ -1,4 +1,6 @@
-FROM ubuntu:trusty
+# image id locked
+#FROM ubuntu:trusty
+FROM ef83896b7fb9
 ENV DEBIAN_FRONTEND noninteractive
 
 MAINTAINER Syunsuke Komma <syunsuke@weseek.co.jp>
@@ -61,7 +63,8 @@ RUN chown -R syunsuke: /home/syunsuke/.ssh && \
 ## add user(common user)
 RUN useradd -d /home/ubuntu -m -s /bin/bash ubuntu && \
     usermod -aG sudo ubuntu
-RUN echo 'ubuntu:ubuntu' | chpasswd
+RUN echo 'ubuntu:ubuntu' > /tmp/ubuntu.chpasswd
+RUN cat /tmp/ubuntu.chpasswd | chpasswd
 
 
 ## supervisor settings
