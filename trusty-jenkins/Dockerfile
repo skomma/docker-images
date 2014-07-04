@@ -5,7 +5,7 @@ MAINTAINER Syunsuke Komma <syunsuke@weseek.co.jp>
 RUN wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 RUN echo 'deb http://pkg.jenkins-ci.org/debian binary/' > /etc/apt/sources.list.d/jenkins.list
 RUN apt-get update
-RUN apt-get install jenkins
+RUN apt-get install -y jenkins
 
 ## Install supervisord configuration file
 ADD src/supervisord-jenkins.conf /etc/supervisord/conf.d/jenkins.conf
