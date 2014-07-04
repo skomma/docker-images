@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y jenkins
 
 ## Install supervisord configuration file
-ADD src/supervisord-jenkins.conf /etc/supervisord/conf.d/jenkins.conf
+ADD src/supervisord-jenkins.conf /etc/supervisor/conf.d/jenkins.conf
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
